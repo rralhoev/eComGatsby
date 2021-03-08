@@ -1,55 +1,61 @@
 import * as React from "react"
-import { graphql, Link } from "gatsby"
+import { graphql, Link, useStaticQuery } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Anime from "../components/anime"
+import Brands from "../components/brands"
 
-interface PageProps {
-  data: any
-}
-
-const IndexPage = ({data}:PageProps) => (
-  <Layout>
-    <SEO title="Home" />
-    <h1>Anime</h1>
-    {data && data.allContentfulAnime && data.allContentfulAnime.edges.map((item:any) => {
-      return (<Anime
-        key={item.node.id}
-        description={item.node.description.description}
-        image={item.node.image.file.url}
-        imageAlt={item.node.image.title}
-        title={item.node.title}
-      />)
-    })}
-    <p>
-      <Link to="/page-2/">Go to page 2</Link> <br />
-      <Link to="/using-typescript/">Go to "Using TypeScript"</Link>
-    </p>
-  </Layout>
-)
-
-export const query = graphql`
-  query PageQuery {
-    allContentfulAnime {
-      edges {
-        node {
-          id
-          title
-          description {
-            description
+const IndexPage = () => {
+  const data = useStaticQuery(graphql`
+    query PageQuery {
+      allContentfulAnime {
+        edges {
+          node {
             id
-          }
-          image {
             title
-            file {
-              url
+            description {
+              description
+              id
+            }
+            image {
+              title
+              file {
+                url
+              }
             }
           }
         }
       }
     }
+  `)
+  const [activeBrand, setActiveBrand] = React.useState('All');
+
+  const changeActive = (e: any) => {
+    setActiveBrand(e.target.textContent);
   }
-`
+
+  return (
+    <Layout>
+      <SEO title={activeBrand === 'All' ? 'Home' : activeBrand} />
+      <Brands active={activeBrand} changeBrand={changeActive} />
+      {data && data.allContentfulAnime && data.allContentfulAnime.edges.map((item:any) => {
+        return (activeBrand === 'All' || item.node.title === activeBrand) && (
+          <Anime
+            key={item.node.id}
+            description={item.node.description.description}
+            image={item.node.image.file.url}
+            imageAlt={item.node.image.title}
+            title={item.node.title}
+            activeBrand={activeBrand}
+          />
+        )
+      })}
+      <p>
+        <Link to="/page-2/">Go to page 2</Link>
+      </p>
+    </Layout>
+  )
+}
 
 export default IndexPage

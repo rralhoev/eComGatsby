@@ -1,29 +1,37 @@
 import React from "react";
 import styled from 'styled-components';
+import { Picture } from "gatsby-plugin-image/dist/src/components/picture"
 
 interface AnimeProps {
   title: string,
   description: string,
   image: string,
-  imageAlt: string
+  imageAlt: string,
+  activeBrand: string
 }
-const Anime = ({ title, description, image, imageAlt }:AnimeProps) => {
+const Anime = ({ title, description, image, imageAlt, activeBrand }:AnimeProps) => {
   return (
-    <div>
+    <article>
       <Title className="title">
         {title}
       </Title>
+      <PictureBox alt={imageAlt} src={image}/>
       <Description className="description">
         {description}
       </Description>
-      <img alt={imageAlt} src={image}/>
-    </div>
+    </article>
   )
 }
 
-const Title = styled.b`
-  font-size: 23px;
-  line-height: 25px;
+const Title = styled.h1`
+  display: block;
+  font-size: 35px;
+  line-height: 38px;
+`
+
+const PictureBox = styled.img`
+  margin: 0;
+  width: 100%;
 `
 
 const Description = styled.div`

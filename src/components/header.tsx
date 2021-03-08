@@ -1,46 +1,51 @@
 import * as React from "react"
-import PropTypes from "prop-types"
+import styled from 'styled-components'
 import { Link } from "gatsby"
+import { Search } from "./search"
 
 interface HeaderProps {
   siteTitle: string
 }
 
-const Header = ({ siteTitle }:HeaderProps) => (
+const Header = ({ siteTitle = "" }: HeaderProps) => (
   <header
     style={{
-      background: `rebeccapurple`,
-      marginBottom: `1.45rem`,
+      background: `white`,
     }}
   >
     <div
       style={{
         margin: `0 auto`,
-        maxWidth: 960,
+        maxWidth: 1280,
         padding: `1.45rem 1.0875rem`,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between"
       }}
     >
-      <h1 style={{ margin: 0 }}>
+      <Title style={{ margin: 0 }}>
         <Link
           to="/"
           style={{
-            color: `white`,
+            color: `black`,
             textDecoration: `none`,
+            textTransform: `uppercase`
           }}
         >
           {siteTitle}
         </Link>
-      </h1>
+      </Title>
+      <Search />
     </div>
   </header>
 )
 
-Header.propTypes = {
-  siteTitle: PropTypes.string,
-}
+const Title = styled.h1`
+  font-size: calc(1.5rem + 0.5 * ((100vw - 20rem) / 60));
+  
+  @media screen and (max-width: 900px) {
+    font-size: calc(1rem + 0.5 * ((100vw - 20rem) / 60));
+  }
+`
 
-Header.defaultProps = {
-  siteTitle: ``,
-}
-
-export default Header
+export default Header;
