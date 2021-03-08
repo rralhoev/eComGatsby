@@ -25,8 +25,13 @@ const Anime = ({ title, description, image, imageAlt, activeBrand }:AnimeProps) 
 
 const Title = styled.h1`
   display: block;
-  font-size: 35px;
-  line-height: 38px;
+  font-size: calc(2rem + 0.3 * ((100vw - 100rem) / 60));
+  line-height: calc(2rem + 0.5 * ((100vw - 60rem) / 60));
+  margin-bottom: 20px;
+
+  @media (max-width: 768px) {
+    margin-bottom: 10px;
+  }
 `
 
 const PictureBox = styled.img`
@@ -35,7 +40,13 @@ const PictureBox = styled.img`
 `
 
 const Description = styled.div`
-  padding: 20px 0;
+  margin: 20px 0;
+  font-size: calc(1rem + 0.3 * ((100vw - 60rem) / 60));
+  line-height: calc(1rem + 0.5 * ((100vw - 40rem) / 60));
+  
+  @media (max-width: 768px) {
+    margin: 10px 0;
+  }
 `
 
 export default Anime;

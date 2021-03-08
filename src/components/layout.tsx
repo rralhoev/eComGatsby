@@ -7,6 +7,7 @@
 
 import * as React from "react"
 import { useStaticQuery, graphql } from "gatsby"
+import styled from "styled-components"
 
 import Header from "./header"
 import "../styles/typography.css"
@@ -30,13 +31,7 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <>
       <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: 1280,
-          padding: `0 1.0875rem 1.45rem`
-        }}
-      >
+      <Inner>
         <main>{children}</main>
         <footer
           style={{
@@ -47,9 +42,15 @@ const Layout = ({ children }: LayoutProps) => {
           {` `}
           <a href="https://www.gatsbyjs.com">Gatsby</a>
         </footer>
-      </div>
+      </Inner>
     </>
   )
 }
+
+const Inner = styled.div`
+  margin: 0 auto;
+  max-width: 1280px;
+  width: 90%;
+`
 
 export default Layout

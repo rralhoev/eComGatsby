@@ -13,16 +13,7 @@ const Header = ({ siteTitle = "" }: HeaderProps) => (
       background: `white`,
     }}
   >
-    <div
-      style={{
-        margin: `0 auto`,
-        maxWidth: 1280,
-        padding: `1.45rem 1.0875rem`,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between"
-      }}
-    >
+    <HeaderContainer>
       <Title style={{ margin: 0 }}>
         <Link
           to="/"
@@ -36,15 +27,29 @@ const Header = ({ siteTitle = "" }: HeaderProps) => (
         </Link>
       </Title>
       <Search />
-    </div>
+    </HeaderContainer>
   </header>
 )
 
-const Title = styled.h1`
-  font-size: calc(1.5rem + 0.5 * ((100vw - 20rem) / 60));
+const HeaderContainer = styled.div`
+  margin: 0 auto;
+  max-width: 1280px;
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0 10px;
   
-  @media screen and (max-width: 900px) {
-    font-size: calc(1rem + 0.5 * ((100vw - 20rem) / 60));
+  @media (max-width: 900px) {
+    padding: 10px 0 0;
+  }
+`
+
+const Title = styled.h1`
+  font-size: calc(2rem + 0.5 * ((100vw - 50rem) / 60));
+  
+  @media screen and (max-width: 500px) {
+    font-size: calc(1.5rem + 0.5 * ((100vw - 40rem) / 60));
   }
 `
 

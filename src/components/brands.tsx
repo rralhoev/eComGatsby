@@ -53,6 +53,11 @@ const Brands = ({ active, changeBrand }:BrandsProps) => {
 
 const BrandsContainer = styled.div`
   padding: 10px 0 20px;
+  overflow-x: scroll;
+
+  @media (max-width: 500px) {
+    padding: 20px 0 10px;
+  }
 `
 
 const List = styled.ul`
@@ -60,15 +65,23 @@ const List = styled.ul`
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
+  flex-wrap: nowrap;
 
   li {
     margin: 0;
     padding: 5px 10px;
     border-radius: 12px;
     cursor: pointer;
+    white-space: nowrap;
     
     &.active {
       background-color: #D8D7DC;
+    }
+    
+    @media (max-width: 500px) {
+      padding: 2px 10px;
+      font-size: 12px;
+      line-height: 16px;
     }
   }
 `
